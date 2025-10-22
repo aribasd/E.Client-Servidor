@@ -12,29 +12,40 @@
 <label>Divident<input type="text" id="divident" placeholder="Divident"></label>
 
 
-<button type="button">Enviar les dades</button>
+<button type="button" id="Enviar">Enviar les dades</button>
+
 
 
 </form>
 
 
+
+
 <script>
 
-let divisor = 20;
+document.getElementById("Enviar").addEventListener("click", function() {
+
+
+let divisor = Number(document.getElementById("divisor").value);
+let divident = Number(document.getElementById("divident").value);
 
 let dividend = 30;
 
 
-if (id="divisor" < 0)
+if (divisor < 0)
 {
     divisor = divisor + divisor   
 }
-else if (id="divisor" = 0)
+else if (divisor == 0)
 {
 console.log("El divisor no pot ser cero")
 }
 
+});
+
+
 </script>
+
 
 
 </html>
