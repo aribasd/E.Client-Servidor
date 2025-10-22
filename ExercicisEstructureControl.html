@@ -15,11 +15,10 @@
 <button type="button" id="Enviar">Enviar les dades</button>
 
 
-
 </form>
 
 
-
+<div id="resultat"></div>
 
 <script>
     
@@ -30,15 +29,17 @@ document.getElementById("Enviar").addEventListener("click", function() {
 let divisor = Number(document.getElementById("divisor").value);
 let divident = Number(document.getElementById("divident").value);
 
+let resultat = document.getElementById("resultat");
 
 
 if (divisor < 0)
 {
-    divisor = divisor + divisor   
+    divisor = divisor + divisor
 }
+
 else if (divisor == 0)
 {
-console.log("El divisor no pot ser cero")
+resultat.textContent = "El divisor no pot ser cero"
 }
 
 });
