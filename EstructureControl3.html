@@ -1,7 +1,32 @@
-<html>
+    <html>
 
 
+    <script>
+
+    let angles = [];
+
+    let angle = Number(prompt("Dona'm un angle"));
 
 
+    while (angle > -75 && angle < 75)
+    {
+    angles.push(angle);
 
-</html>
+    angle = Number(prompt("Dona'm un altre angle"));
+    }
+
+    let total = 0;
+
+    for (let index = 0; index < angles.length; index++)
+    {
+       total = total + angles[index]
+
+    }
+
+    let mitjana = total / angles.length;
+
+
+    </script>
+
+
+    </html>
