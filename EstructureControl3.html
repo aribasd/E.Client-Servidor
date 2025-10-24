@@ -1,6 +1,8 @@
     <html>
 
-    <div id="resultat"></div>
+
+    <div id="mitjana"></div>
+
 
 
     <script>
@@ -11,12 +13,19 @@
 
     let mitjana = document.getElementById("mitjana");
 
+    let continuar = true;
 
-    while (angle > -75 && angle < 75)
+
+    while (continuar)
     {
     angles.push(angle);
 
     angle = Number(prompt("Dona'm un altre angle"));
+
+    if (angle <= -75 || angle >= 75)
+    {
+      continuar = false;
+    }
     }
 
     let total = 0;
@@ -27,7 +36,8 @@
 
     }
 
-    mitjana.textContent = "La mitjana de tots els angles és" + total / angles.length;
+    mitjana.textContent = "Tenim els angles" + angles + "La mitjana de tots els angles és" + (total / angles.length);
+
 
     </script>
 
