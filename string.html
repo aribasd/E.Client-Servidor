@@ -1,26 +1,40 @@
 <html>
+  <label>Afegix el text</label>
+  <textarea id="text" placeholder="Afageix el text"></textarea>
 
+  <button type="button" id="enviar">Enviar</button>
 
-<label>Afegix el text</label>
-<textarea id="text" placeholder="Afageix el tex"></textarea>
+  <div id="resultat"></div>
 
+  <script>
+   
+   document.getElementById("enviar").addEventListener("click", function () {
+      
+    let txt = document.getElementById("text").value;
+     
+    let array = txt.split("");
 
-<button type ="button">Enviar</button>
+     let contadorlletres = {};
 
-<script>
+     
+      array.forEach(function (lletra) {
+        if (lletra !== " ") {
+          if (contadorlletres[lletra]) {
+            contadorlletres[lletra]++;
+          } else {
+            contadorlletres[lletra] = 1;
+          }
+        }
+      });
 
-document.getElementById("button").addEventListener("click", function() { 
+      let resultat = document.getElementById("resultat");
+     
 
+       for (let lletra in contadorlletres) {
+        resultat.textContent +=
+          "La lletra " + lletra + " apareix un total de " + contadorlletres[lletra] + " vegades";
+      }
 
-
-
-
-});
-
-
-
-</script>
-
-
-
+    });
+  </script>
 </html>
