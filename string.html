@@ -1,93 +1,116 @@
-<html>
+    <html>
 
-<body>
-  <label>Afegix el text</label>
-  <textarea id="text" placeholder="Afageix el text"></textarea>
+    <body>
 
-  <button type="button" id="enviar">Enviar</button>
+      <label>Afegix el text</label> <!--En aqui afegim un label per afegir un text i descriure el que farem a textarea-->
 
-  <div id="resultat"></div>
+      <textarea id="text" placeholder="Afageix el text"></textarea> <!--Afegim un textarea per afegir el text i desp enviar-ho-->
+
+      <button type="button" id="enviar">Enviar</button> <!--Afegim un boto, li donem un tipus i un id per recollir les dade del html-->
+
+      <div id="resultat"></div> <!--Afegim un div on hi posarem el resultat que ens dongui el contador de lletres-->
+
+        <div id="resultatParaules"></div> <!--Div per mostrar les paraules i amb quina lletra començen-->
 
 
-    <div id="resultatParaules"></div>
+        <div id="totalParaules"></div>
 
+      </body>
 
-  </body>
-
-  <script>
-   
-   document.getElementById("enviar").addEventListener("click", function () {
+      <script>
       
-    let txt = document.getElementById("text").value;
-     
-    let array = txt.split("");
+      document.getElementById("enviar").addEventListener("click", function () { /*Aqui agafem els valors del html per treballar amb ells i al fer
+        el fer click cridem tota la funcio*/
+          
+        let txt = document.getElementById("text").value; // Creem txt on agafem el id del html "text"
+        
+        let array = txt.split(""); // creem una variable que es diu array i la dividim per lletres
 
-     let contadorlletres = {};
+        let contadorlletres = {}; // creem un objecte buit 
 
-     
-      array.forEach(function (lletra) {
+        
+          array.forEach(function (lletra) { // Creem un foreach on recorrem array
 
-        if (lletra !== " " && lletra !== "ñ" && lletra !== "ç") {
+            if (lletra !== " " && lletra !== "ñ" && lletra !== "ç") { // Condicio si lletra no es espai o la lletra ç o ñ
 
-          if (contadorlletres[lletra]) {
-            contadorlletres[lletra]++;
+              if (contadorlletres[lletra]) { // Condicio dintre una condicio on afegim un altre si la lletra ja la havia trobat
+                contadorlletres[lletra]++;
 
-          } else {
-            contadorlletres[lletra] = 1;
+              } else {
+                contadorlletres[lletra] = 1; // Afegim la nova lletra i li passem un valor de 1
+              }
+            }
+          });
+
+          let resultat = document.getElementById("resultat"); // Agafem el valor de resultat per donar referencia en el html i mostrar-ho
+        
+
+          for (let lletra in contadorlletres) {
+            resultat.innerHTML += lletra + ":" + contadorlletres[lletra] + "<br>" ;
           }
-        }
+
+          //Dividit per per paraules
+
+            let arrayParaules = txt.split(" ").sort(); // Creem una variable que es digui arrayParaules i li donem el txt divit per paraules " "
+
+            let contadorParaules = {}; //contadorParaules quan li pasem el bucle foreach a continuacio agafa valors
+
+
+            // Aqui la part de else es per afegir la paraula per el primer cop en canvi a dalt es per dir que la paraula esta repetida
+
+
+            arrayParaules.forEach(function (paraula) { // Aqui recorrem el arrayParaules que es el valor de text fen un split per paraules i despres afegim valor al objectes
+          
+              if (contadorParaules[paraula]) {  //Aqui comprobem si la paraula ja existeix si es aixi sumem a la paraula repetida
+          
+                contadorParaules[paraula]++; // Sumem la paraula repetida
+      
+              } else {  // Fem un else on afegim la primera vegada que passem la paraula
+        
+                contadorParaules[paraula] = 1;  //Li donem un 1 a la paraula que li donem
+      
+              }
       });
 
-      let resultat = document.getElementById("resultat");
-     
-
-       for (let lletra in contadorlletres) {
-        resultat.innerHTML += lletra + ":" + contadorlletres[lletra] + "<br>" ;
-      }
-
-       //Dividit per per paraules
-
-        let arrayParaules = txt.split(" ").sort();
-
-        let contadorParaules = {};
-
-        arrayParaules.forEach(function (paraula) {
-       
-          if (contadorParaules[paraula]) {
       
-            contadorParaules[paraula]++;
-   
-          } else {
-    
-            contadorParaules[paraula] = 1;
-   
+      let resultatParaules = document.getElementById("resultatParaules");
+      
+      resultatParaules.innerHTML = "Comptador de paraules:<br><br>";
+
+      totalParaulesElement = document.getElementById("totalParaules");
+
+      totalParaulesElement.innerHTML = "";
+
+
+
+      let totalParaules = 0;
+
+
+      let abecedari = "abcdefghijklmnopqrstuvwxyz".split("");
+
+      abecedari.forEach(function (lletra) {  // Foreach
+      
+      resultatParaules.innerHTML += "<b>Lletra: " + lletra + "</b><br>";
+
+        for (let paraula in contadorParaules) {
+        
+          if (paraula.startsWith(lletra)) {
+
+            resultatParaules.innerHTML += paraula + "<br>";
+            totalParaules++;
           }
-  });
 
-  
-  let resultatParaules = document.getElementById("resultatParaules");
-  
-  resultatParaules.innerHTML = "Comptador de paraules:<br><br>";
+        }
 
-  let abecedari = "abcdefghijklmnopqrstuvwxyz".split("");
+          resultatParaules.innerHTML += "<br>";
 
-  abecedari.forEach(function (lletra) {
-   
-    resultatParaules.innerHTML += "<b>Lletra: " + lletra + "</b><br>";
 
-    
-    for (let paraula in contadorParaules) {
-     
-      if (paraula.startsWith(lletra)) {
-        resultatParaules.innerHTML += paraula + ": " + contadorParaules[paraula] + "<br>";
-      }
-
-    }
-    resultatParaules.innerHTML += "<br>";
-  });
+      });
+          totalParaulesElement.innerHTML = "El total de paraules: " + totalParaules;
 
 
 
-    });
-  </script>
-</html>
+
+        });
+      </script>
+    </html>
